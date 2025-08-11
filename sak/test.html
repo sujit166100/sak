@@ -1,0 +1,413 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Sakshi ❤️</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #f9d5e5;
+      --tertiary: #ffe2e2;
+      --dark: #444;
+      --light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      color: var(--light);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: all 0.8s ease-in-out;
+    }
+
+    .intro-name {
+      font-size: 4rem;
+      font-family: 'Dancing Script', cursive;
+      color: var(--light);
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .btn {
+      padding: 12px 28px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      color: var(--dark);
+      background: var(--light);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .birthday-content {
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    .show-content {
+      opacity: 1;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-family: 'Dancing Script', cursive;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px rgba(255,107,107,0.3);
+    }
+
+    .message {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .message p {
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .heart {
+      color: var(--primary);
+      font-size: 1.5rem;
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); } 25% { transform: scale(1.1); } 50% { transform: scale(1); } 75% { transform: scale(1.1); } 100% { transform: scale(1); }
+    }
+
+    .stars-container {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;
+    }
+
+    .star {
+      position: absolute; background-color: var(--light); width: 2px; height: 2px; border-radius: 50%; opacity: 0; animation: twinkle 5s infinite;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; }
+    }
+
+    .heart-icon {
+      position: absolute; font-size: 25px; color: var(--primary); animation: falling 10s linear infinite; opacity: 0; z-index: 2;
+    }
+
+    @keyframes falling {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* === NEW PHOTO GALLERY STYLES === */
+    #photo-gallery {
+      margin-top: 4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1.2s ease;
+    }
+
+    #photo-gallery h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: var(--light);
+      margin-bottom: 2.5rem;
+    }
+
+    .polaroid-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .polaroid {
+      background: var(--light);
+      padding: 15px 15px 70px 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      position: relative;
+      width: 250px;
+      opacity: 0;
+      transform: scale(0.8) rotate(0deg);
+      transition: all 0.6s ease-in-out;
+    }
+
+    .polaroid.visible {
+        opacity: 1;
+        transform: scale(1) rotate(var(--rotation));
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .polaroid figcaption {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: var(--dark);
+    }
+
+    .music-btn {
+      position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background-color: var(--primary); display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease;
+    }
+
+    .music-btn:hover { transform: scale(1.1); }
+    .music-icon { color: var(--light); font-size: 20px; }
+
+    @media (max-width: 768px) {
+      .intro-name { font-size: 3rem; }
+      h1 { font-size: 2.5rem; }
+      .message { font-size: 1rem; padding: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Screen -->
+  <div class="intro-screen" id="introScreen">
+    <h1 class="intro-name animate__animated animate__heartBeat">Sakshi</h1>
+    <button class="btn animate__animated animate__pulse animate__infinite" id="surpriseBtn">💖 Your Surprise Awaits 💖</button>
+  </div>
+
+  <!-- Stars Background -->
+  <div class="stars-container" id="starsContainer"></div>
+
+  <div class="wrapper">
+    <!-- Main Content -->
+    <div class="container">
+      <div class="birthday-content" id="birthdayContent">
+        <h1 class="animate__animated animate__fadeInDown">Happy Birthday, Sakshi! ❤️</h1>
+
+        <div class="message" id="message">
+          <p>Even if life has placed us on different paths, my heart still walks beside you in every step you take.</p>
+          <p>You are the chapter I'll never stop reading, the dream I never want to wake up from.</p>
+          <p>No matter how much time passes or how far the world pulls us apart, you remain my safest place, my warmest memory, my forever home.</p>
+          <p>I pray this year wraps you in the gentlest love, the brightest smiles, and the peace your soul deserves.</p>
+          <p>Somewhere out here, under the same sky, I'm still loving you — quietly, endlessly, and without an end.</p>
+          <p>You were, are, and always will be… my forever <span class="heart">❤️</span></p>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- == PHOTO GALLERY - REPLACE IMAGES AND CAPTIONS HERE == -->
+        <!-- ==================================================== -->
+        <div id="photo-gallery">
+            <h2>Our Unforgettable Moments</h2>
+            <div class="polaroid-gallery">
+                <!-- Photo 1 -->
+                <div class="polaroid">
+                    <!-- IMPORTANT: Replace the 'src' with your image file path -->
+                    <img src="s2.jpeg" alt="Memory 1">
+                    <figcaption>Looking so cute</figcaption>
+                </div>
+                <!-- Photo 2 -->
+                <div class="polaroid">
+                    <img src="s5.jpeg" alt="Memory 2">
+                    <figcaption>in traditional saree</figcaption>
+                </div>
+                <!-- Photo 3 -->
+                <div class="polaroid">
+                    <img src="s6.jpeg" alt="Memory 3">
+                    <figcaption>That silly moment</figcaption>
+                </div>
+                 <!-- Photo 4 -->
+                <div class="polaroid">
+                    <img src="s1.jpeg" alt="Memory 4">
+                    <figcaption>Always laughing</figcaption>
+                </div>
+
+
+
+
+
+                 <!-- Photo 3 -->
+                <div class="polaroid">
+                    <img src="s4.jpeg" alt="Memory 3">
+                    <figcaption>barki porgi</figcaption>
+                </div>
+
+
+                 <!-- Photo 3 -->
+                <div class="polaroid">
+                    <img src="s3.jpeg" alt="Memory 3">
+                    <figcaption>shani asun kulysark vagnari</figcaption>
+                </div>
+            </div>
+        </div>
+        <!-- ==================================================== -->
+        <!-- ============== END OF PHOTO GALLERY ============== -->
+        <!-- ==================================================== -->
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Music Button -->
+  <div class="music-btn" id="musicBtn">
+    <span class="music-icon">♫</span>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const starsContainer = document.getElementById('starsContainer');
+      for (let i = 0; i < 200; i++) { createStar(starsContainer); }
+
+      createFallingHearts();
+
+      const surpriseBtn = document.getElementById('surpriseBtn');
+      const introScreen = document.getElementById('introScreen');
+      const birthdayContent = document.getElementById('birthdayContent');
+
+      surpriseBtn.addEventListener('click', function() {
+        introScreen.style.transform = 'translateY(-100%)';
+        const audio = new Audio('https://assets.mixkit.co/music/preview/mixkit-a-very-happy-christmas-897.mp3');
+        audio.loop = true;
+
+        setTimeout(() => {
+          introScreen.classList.add('hidden');
+          birthdayContent.classList.add('show-content');
+
+          const paragraphs = document.querySelectorAll('.message p');
+          let messageAnimationDuration = 500 + (paragraphs.length * 800);
+
+          paragraphs.forEach((p, index) => {
+            setTimeout(() => {
+              p.style.opacity = '1';
+              p.style.transform = 'translateY(0)';
+            }, 500 + (index * 800));
+          });
+
+          // Animate photo gallery after the message
+          setTimeout(() => {
+            const photoGallery = document.getElementById('photo-gallery');
+            const polaroids = document.querySelectorAll('.polaroid');
+
+            photoGallery.style.opacity = '1';
+            photoGallery.style.transform = 'translateY(0)';
+
+            polaroids.forEach((p, index) => {
+                // Add a random rotation for a natural look
+                p.style.setProperty('--rotation', `${Math.random() * 10 - 5}deg`);
+                setTimeout(() => {
+                    p.classList.add('visible');
+                }, index * 400); // Stagger the appearance of each photo
+            });
+          }, messageAnimationDuration);
+
+          // Music button functionality
+          const musicBtn = document.getElementById('musicBtn');
+          let isPlaying = false;
+          audio.play().catch(e => console.log('Audio play failed:', e));
+          isPlaying = true;
+          musicBtn.innerHTML = '<span class="music-icon">❙❙</span>';
+
+          musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+              audio.pause();
+              musicBtn.innerHTML = '<span class="music-icon">♫</span>';
+            } else {
+              audio.play().catch(e => console.log('Audio play failed:', e));
+              musicBtn.innerHTML = '<span class="music-icon">❙❙</span>';
+            }
+            isPlaying = !isPlaying;
+          });
+
+        }, 800);
+      });
+
+      function createStar(container) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(star);
+      }
+
+      function createFallingHearts() {
+        setInterval(() => {
+          const heart = document.createElement('div');
+          heart.classList.add('heart-icon');
+          heart.innerHTML = '❤️';
+          heart.style.left = `${Math.random() * 100}%`;
+          heart.style.animationDelay = `${Math.random() * 5}s`;
+          document.body.appendChild(heart);
+          setTimeout(() => { heart.remove(); }, 10000);
+        }, 800);
+      }
+    });
+  </script>
+</body>
+</html>
